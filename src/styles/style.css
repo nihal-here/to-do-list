@@ -1,0 +1,13 @@
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: rebeccapurple;
+}
+
+button {
+  background-color: blue;
+  padding: 40px;
+  color: white;
+  font-size: 30px;
+}
