@@ -1,10 +1,13 @@
 import { format } from "date-fns";
+import Storage from "./storage";
 import Project from "./project";
 import Task from "./task";
-import Storage from "./storage";
+import "../styles/style.css";
 
 export default class UI {
-  static loadHomePage() {
+  // LOADING CONTENT
+
+  static loadHomepage() {
     UI.loadProjects();
     UI.initProjectButtons();
     UI.openProject("Inbox", document.getElementById("button-inbox-projects"));
@@ -26,6 +29,7 @@ export default class UI {
 
     UI.initAddProjectButtons();
   }
+
   static loadTasks(projectName) {
     Storage.getTodoList()
       .getProject(projectName)
@@ -71,6 +75,7 @@ export default class UI {
 
     UI.loadTasks(projectName);
   }
+
   // CREATING CONTENT
 
   static createProject(name) {
@@ -88,6 +93,7 @@ export default class UI {
 
     UI.initProjectButtons();
   }
+
   static createTask(name, dueDate) {
     const tasksList = document.getElementById("tasks-list");
     tasksList.innerHTML += `
@@ -153,6 +159,7 @@ export default class UI {
   static handleKeyboardInput(e) {
     if (e.key === "Escape") UI.closeAllPopups();
   }
+
   // PROJECT ADD EVENT LISTENERS
 
   static initAddProjectButtons() {
@@ -196,6 +203,7 @@ export default class UI {
     addProjectButton.classList.remove("active");
     addProjectPopupInput.value = "";
   }
+
   static addProject() {
     const addProjectPopupInput = document.getElementById(
       "input-add-project-popup"

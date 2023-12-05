@@ -19,11 +19,14 @@ export default class Storage {
         .map((project) => Object.assign(new Project(), project))
     );
 
-    todoList.getProjects().forEach((project) => {
-      project.setTasks(
-        project.getTasks().map((task) => Object.assign(new Task(), task))
+    todoList
+      .getProjects()
+      .forEach((project) =>
+        project.setTasks(
+          project.getTasks().map((task) => Object.assign(new Task(), task))
+        )
       );
-    });
+
     return todoList;
   }
 
@@ -34,9 +37,9 @@ export default class Storage {
   }
 
   static deleteProject(projectName) {
-    const todolist = Storage.getTodoList();
-    todolist.addProject(projectName);
-    Storage.saveTodoList(todolist);
+    const todoList = Storage.getTodoList();
+    todoList.deleteProject(projectName);
+    Storage.saveTodoList(todoList);
   }
 
   static addTask(projectName, task) {
@@ -51,15 +54,15 @@ export default class Storage {
     Storage.saveTodoList(todoList);
   }
 
-  static renameTask(projectName, oldTaskName, newTaskName) {
+  static renameTask(projectName, taskName, newTaskName) {
     const todoList = Storage.getTodoList();
-    todoList.getProject(projectName).getTasks(oldTaskName).setName(newTaskName);
+    todoList.getProject(projectName).getTask(taskName).setName(newTaskName);
     Storage.saveTodoList(todoList);
   }
 
-  static setTasksDate(projectName, taskName, date) {
+  static setTaskDate(projectName, taskName, newDueDate) {
     const todoList = Storage.getTodoList();
-    todoList.getProject(projectName).getTasks(taskName).setDate(date);
+    todoList.getProject(projectName).getTask(taskName).setDate(newDueDate);
     Storage.saveTodoList(todoList);
   }
 
@@ -69,9 +72,9 @@ export default class Storage {
     Storage.saveTodoList(todoList);
   }
 
-  static updateThisWeekProject() {
+  static updateWeekProject() {
     const todoList = Storage.getTodoList();
-    todoList.updateThisWeekProject();
+    todoList.updateWeekProject();
     Storage.saveTodoList(todoList);
   }
 }

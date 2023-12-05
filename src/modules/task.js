@@ -1,5 +1,5 @@
 export default class Task {
-  constructor(name, dueDate = "No Date") {
+  constructor(name, dueDate = "No date") {
     this.name = name;
     this.dueDate = dueDate;
   }
@@ -21,15 +21,9 @@ export default class Task {
   }
 
   getDateFormatted() {
-    const parts = this.dueDate.split("/");
-    if (parts.length === 3) {
-      const [month, day, year] = parts;
-      const formattedDate = new Date(
-        `${month}/${day}/${year}`
-      ).toLocaleDateString();
-      return formattedDate;
-    } else {
-      return "invalid Date";
-    }
+    const day = this.dueDate.split("/")[0];
+    const month = this.dueDate.split("/")[1];
+    const year = this.dueDate.split("/")[2];
+    return `${month}/${day}/${year}`;
   }
 }

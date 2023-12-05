@@ -17,12 +17,13 @@ export default class Project {
   setTasks(tasks) {
     this.tasks = tasks;
   }
+
   getTasks() {
     return this.tasks;
   }
 
-  getTasks(taskName) {
-    return this.tasks.filter((task) => task.getName() === taskName);
+  getTask(taskName) {
+    return this.tasks.find((task) => task.getName() === taskName);
   }
 
   contains(taskName) {
@@ -30,14 +31,12 @@ export default class Project {
   }
 
   addTask(newTask) {
-    if (this.tasks.find((task) => task.getName() === newTask.getName())) {
-      return;
-    }
+    if (this.tasks.find((task) => task.getName() === newTask.name)) return;
     this.tasks.push(newTask);
   }
 
   deleteTask(taskName) {
-    this.tasks = this.tasks.filter((task) => task.getName() !== taskName);
+    this.tasks = this.tasks.filter((task) => task.name !== taskName);
   }
 
   getTasksToday() {
@@ -48,8 +47,8 @@ export default class Project {
   }
 
   getTasksThisWeek() {
-    return this.tasks.filter((tasks) => {
-      const taskDate = new Date(tasks.getDateFormatted());
+    return this.tasks.filter((task) => {
+      const taskDate = new Date(task.getDateFormatted());
       return isThisWeek(subDays(toDate(taskDate), 1));
     });
   }
